@@ -10,5 +10,15 @@ module.exports = {
       },
       success: successFunction
     })
+  },
+  CheckPassword(userName, successFunction) {
+    wx.request({
+      url: url + 'CheckPassword',
+      method: 'GET',
+      data: {
+        'username': userName
+      },
+      success: successFunction
+    })
   }
 }

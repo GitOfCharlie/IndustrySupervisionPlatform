@@ -12,4 +12,5 @@ public class UpdateProductionByIdResponse {
         this.date = date;
         this.data = data;
     }
+
 }

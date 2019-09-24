@@ -62,6 +62,7 @@ App({
     hasLogin: false,
     token: "",
     backenUrl: "",
+    homepageUrl: "pages/XDLPlatform/home/home"
   },
 
 })

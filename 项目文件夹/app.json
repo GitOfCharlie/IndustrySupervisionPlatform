@@ -1,11 +1,16 @@
 {
   "pages": [
-    "pages/homepage/homepage",
-    "pages/production/production",
-    "pages/device/device",
-    "pages/station_1/station_1",
-    "pages/station_2/station_2",
-    "pages/userCenter/userCenter"
+    "pages/login/login",
+    "pages/userCenter/userCenter",
+    "pages/IntelligentFactory/homepage/homepage",
+    "pages/IntelligentFactory/production/production",
+    "pages/IntelligentFactory/device/device",
+    "pages/IntelligentFactory/station_1/station_1",
+    "pages/IntelligentFactory/station_2/station_2",
+    "pages/XDLPlatform/home/home",
+    "pages/XDLPlatform/TemperatureAndHumidity/TemperatureAndHumidity",
+    "pages/XDLPlatform/OtherData/OtherData",
+    "pages/Admin/homepage/homepage"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -16,7 +21,7 @@
   "tabBar":{
     "selectedColor":"#666666",
     "list":[{
-      "pagePath":"pages/homepage/homepage",
+      "pagePath":"pages/Admin/homepage/homepage",
       "iconPath":"pages/images/homePage.jpg",
       "selectedIconPath": "pages/images/homePage.jpg",
       "text":"首页"

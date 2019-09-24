@@ -10,29 +10,29 @@ Page({
     isHide: false,
     buttonlist:[
       {
-        func:'clickTo_production',
+        func:'clickTo_TemperatureAndHumidity',
         color:'green',
-        title:'产量监测',
-        detail:'查看产量相关的详细数据'
+        title:'温湿度监测',
+        detail:'监测设备温湿度状态'
       },
       {
-        func: 'clickTo_device',
+        func: 'clickTo_OtherData',
         color:'red',
-        title:'设备维护监测',
-        detail:'查看设备状态详细数据'
+        title:'其他指标监测',
+        detail:'查看设备其他指标数据变化'
       },
-      {
-        func: 'clickTo_station_1',
-        color:'blue',
-        title:'工位Ⅰ监测',
-        detail:'查看工位Ⅰ到达产品数量等详细数据',
-      },
-      {
-        func: 'clickTo_station_2',
-        color:'yellow',
-        title:'工位Ⅱ监测',
-        detail:'查看工位Ⅱ到达产品数量等详细数据'
-      }
+      // {
+      //   func: 'clickTo_station_1',
+      //   color:'blue',
+      //   title:'工位Ⅰ监测',
+      //   detail:'查看工位Ⅰ到达产品数量等详细数据',
+      // },
+      // {
+      //   func: 'clickTo_station_2',
+      //   color:'yellow',
+      //   title:'工位Ⅱ监测',
+      //   detail:'查看工位Ⅱ到达产品数量等详细数据'
+      // }
     ]
   },
 
@@ -54,6 +54,7 @@ Page({
               // console.log(app.globalData.userInfo)
               // console.log(app.globalData.userInfo.nickName)
               console.log(res.userInfo)
+              console.log(res)
               // 在用户授权成功后，调用微信的 wx.login 接口，从而获取code
               wx.login({
                 success: res => {
@@ -164,24 +165,14 @@ Page({
     }
   },
   
-  clickTo_production:function(){
+  clickTo_TemperatureAndHumidity:function(){
     wx.navigateTo({
-      url: '../production/production',
+      url: '../TemperatureAndHumidity/TemperatureAndHumidity',
     })
   },
-  clickTo_device: function () {
+  clickTo_OtherData: function () {
     wx.navigateTo({
-      url: '../device/device',
-    })
-  },
-  clickTo_station_1: function () {
-    wx.navigateTo({
-      url: '../station_1/station_1',
-    })
-  },
-  clickTo_station_2: function () {
-    wx.navigateTo({
-       url: '../station_2/station_2',
+      url: '../OtherData/OtherData',
     })
   }
 })

@@ -33,7 +33,7 @@
 }
 
 .IDInput{
-  width: 90%;
+  width: 80%;
   flex-grow: 1;
   display: flex;
   flex-direction: row;

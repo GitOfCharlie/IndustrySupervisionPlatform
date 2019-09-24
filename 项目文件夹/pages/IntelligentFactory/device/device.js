@@ -1,4 +1,4 @@
-var wxCharts = require('../../utils/wxcharts.js');
+var wxCharts = require('../../../utils/wxcharts.js');
 var app = getApp();
 var lineChart1 = null;
 var lineChart2 = null;
@@ -6,6 +6,10 @@ var lineChart2 = null;
 Page({
   data: {
     deviceId: null,
+    maxTemperature: 0,
+    maxHumidity: 0,
+    temperatureColor: 'green',
+    humidityColor: 'green',
     buffer: {}
   },
   touchHandler1: function (e) {
@@ -90,6 +94,7 @@ Page({
       {
         name: '设备温度',
         data: simulationData.data,
+        // data: [],
         format: function (val, name) {
           return val.toFixed(2) + '℃';
         }
@@ -160,6 +165,7 @@ Page({
   },
 
   getTemperature: function(){
+    var that = this;
     wx.request({
       url: 'http://api.nlecloud.com/users/login',
       data: {
@@ -190,13 +196,16 @@ Page({
       method: 'GET',
       success: function(res){
         var datalist = res.data.ResultObj.DataPoints[0].PointDTO;
+
+        var max_T = 0;
         for(var i=0;i<datalist.length;i++){
           categories.push(datalist[i].RecordTime)
           record.push(datalist[i].Value)
+          if (max_T < datalist[i].Value){
+            max_T = datalist[i].Value
+          }
         }
-        console.log(res.data.ResultObj.DataPoints[0])
-        console.log(categories)
-        console.log(record)
+        that.setData({ maxTemperature: max_T })
         var series = [{
           name: '设备温度',
           data: record,
@@ -208,11 +217,23 @@ Page({
           categories: categories,
           series: series
         });
+        that.setTemperatureColorStyle(max_T);
       }
     })
   },
 
+  setTemperatureColorStyle: function(temperature){
+    if(temperature < 25){
+      this.setData({temperatureColor: 'green'})
+    }else if(temperature < 50){
+      this.setData({temperatureColor: 'orange'})
+    }else{
+      this.setData({temperatureColor: 'red'})
+    }
+  },
+
   getHumidity: function(){
+    var that = this
     wx.request({
       url: 'http://api.nlecloud.com/users/login',
       data: {
@@ -243,13 +264,16 @@ Page({
       method: 'GET',
       success: function (res) {
         var datalist = res.data.ResultObj.DataPoints[0].PointDTO;
+
+        var max_H = 0
         for (var i = 0; i < datalist.length; i++) {
           categories.push(datalist[i].RecordTime)
           record.push(datalist[i].Value)
+          if (max_H < datalist[i].Value) {
+            max_H = datalist[i].Value
+          }
         }
-        console.log(res.data.ResultObj.DataPoints[0])
-        console.log(categories)
-        console.log(record)
+        that.setData({ maxHumidity: max_H })
         var series = [{
           name: '设备湿度',
           data: record,
@@ -261,7 +285,16 @@ Page({
           categories: categories,
           series: series
         });
+        that.setHumidityColorStyle(max_H);
       }
-    })    
-  }
+    })
+  },
+
+  setHumidityColorStyle: function (humidity) {
+    if (humidity < 80 && humidity > 30) {
+      this.setData({ humidityColor: 'green' })
+    } else {
+      this.setData({ humidityColor: 'red' })
+    }
+  },
 });
